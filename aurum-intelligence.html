@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurum Intelligence - AI-Powered Finance & Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #070707;
+      --surface: #0f0f0f;
+      --surface-2: #161616;
+      --gold: #C49A3C;
+      --gold-light: #E2BE78;
+      --gold-pale: #F5E9CC;
+      --text: #EDE8DF;
+      --text-muted: #857F76;
+      --text-faint: #4A4540;
+      --border: rgba(196, 154, 60, 0.18);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 7, 7, 0.85);
+      backdrop-filter: blur(16px);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-cta {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold) !important;
+      border: 1px solid var(--border);
+      padding: 0.45rem 1.2rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--black) !important;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 60%, rgba(196, 154, 60, 0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 20% 20%, rgba(196, 154, 60, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      max-width: 900px;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 0.85rem 2.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      padding: 0.85rem 2.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--border);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 1rem 0;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-item {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .marquee-item::before {
+      content: '◆';
+      font-size: 0.45rem;
+      color: var(--gold);
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 520px;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--surface);
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .service-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      position: relative;
+      transition: background 0.3s;
+      overflow: hidden;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+      pointer-events: none;
+    }
+
+    .service-card:hover {
+      background: var(--surface-2);
+    }
+
+    .service-card:hover::after {
+      border-color: var(--border);
+    }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.75rem;
+    }
+
+    .service-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 1.5rem;
+      opacity: 0.75;
+    }
+
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.85rem;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: 1px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+      margin-top: 4rem;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), var(--border), transparent);
+    }
+
+    .step {
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 3rem;
+      height: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.75rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      background: var(--black);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── STATS ── */
+    #stats {
+      background: var(--surface);
+      padding: 5rem 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .stat-box {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── WAITLIST ── */
+    #waitlist {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #waitlist::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(196, 154, 60, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .waitlist-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .waitlist-inner .section-label {
+      justify-content: center;
+    }
+
+    .waitlist-inner .section-label::before {
+      display: none;
+    }
+
+    .waitlist-inner .section-desc {
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    .waitlist-form {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      max-width: 480px;
+      margin: 0 auto 1rem;
+    }
+
+    .waitlist-form input[type="email"] {
+      flex: 1;
+      background: var(--surface);
+      border: none;
+      outline: none;
+      padding: 1rem 1.25rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    .waitlist-form input[type="email"]::placeholder {
+      color: var(--text-faint);
+    }
+
+    .waitlist-form button {
+      background: var(--gold);
+      border: none;
+      padding: 1rem 1.75rem;
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .waitlist-form button:hover {
+      background: var(--gold-light);
+    }
+
+    .waitlist-fine {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    .waitlist-success {
+      display: none;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1.25rem 1.75rem;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .waitlist-success p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .waitlist-success strong {
+      color: var(--gold-light);
+    }
+
+    .waitlist-count {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+    }
+
+    .waitlist-count span {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto 2rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .services-header {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .waitlist-form {
+        flex-direction: column;
+      }
+
+      .waitlist-form button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#">AURUM <span>INTELLIGENCE</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">AI · Finance · Audit · Strategy</p>
+    <h1>Your finance function,<br /><em>reimagined</em> by AI</h1>
+    <p class="hero-sub">Aurum Intelligence deploys precision AI workflows for auditors, finance teams, and SMEs —
+      cutting overhead, sharpening insight, and compressing days into minutes.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">Secure Your Spot</a>
+      <a href="#services" class="btn-ghost">See What We Build</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-item">AI Audit Workflows</span>
+      <span class="marquee-item">Financial Analysis Automation</span>
+      <span class="marquee-item">SME AI Consulting</span>
+      <span class="marquee-item">AI Finance Department</span>
+      <span class="marquee-item">ISA-Aligned Analytics</span>
+      <span class="marquee-item">Working Paper Generation</span>
+      <span class="marquee-item">Risk Assessment Automation</span>
+      <span class="marquee-item">IFRS Reporting AI</span>
+      <span class="marquee-item">CA(SA) Workflow Intelligence</span>
+      <span class="marquee-item">AI Audit Workflows</span>
+      <span class="marquee-item">Financial Analysis Automation</span>
+      <span class="marquee-item">SME AI Consulting</span>
+      <span class="marquee-item">AI Finance Department</span>
+      <span class="marquee-item">ISA-Aligned Analytics</span>
+      <span class="marquee-item">Working Paper Generation</span>
+      <span class="marquee-item">Risk Assessment Automation</span>
+      <span class="marquee-item">IFRS Reporting AI</span>
+      <span class="marquee-item">CA(SA) Workflow Intelligence</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <div>
+          <p class="section-label reveal">What We Do</p>
+          <h2 class="section-title reveal">Four services.<br /><em>One outcome.</em></h2>
+        </div>
+        <p class="section-desc reveal">We build and deploy AI infrastructure across the entire finance and audit value
+          chain — from risk assessment to financial reporting, strategy to execution.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <p class="service-num">01</p>
+          <svg class="service-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="14" height="14" rx="1" stroke="#C49A3C" stroke-width="1" />
+            <rect x="22" y="6" width="14" height="14" rx="1" stroke="#C49A3C" stroke-width="1" stroke-dasharray="2 2" />
+            <rect x="6" y="22" width="14" height="14" rx="1" stroke="#C49A3C" stroke-width="1" stroke-dasharray="2 2" />
+            <rect x="22" y="22" width="14" height="14" rx="1" stroke="#C49A3C" stroke-width="1" />
+            <line x1="13" y1="13" x2="29" y2="29" stroke="#C49A3C" stroke-width="0.75" opacity="0.4" />
+          </svg>
+          <h3>AI Workflows<br />for Auditors</h3>
+          <p>End-to-end audit automation aligned to ISA 315, ISA 330, ISA 520, and ISA 240. From risk assessment to
+            working paper generation to data analytics — we compress weeks into hours.</p>
+          <div class="service-tags">
+            <span class="tag">Risk Assessment</span>
+            <span class="tag">Working Papers</span>
+            <span class="tag">Data Analytics</span>
+            <span class="tag">JE Testing</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal">
+          <p class="service-num">02</p>
+          <svg class="service-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="6,34 14,22 22,26 30,14 36,18" stroke="#C49A3C" stroke-width="1" fill="none" />
+            <circle cx="36" cy="18" r="2" fill="#C49A3C" />
+            <line x1="6" y1="36" x2="36" y2="36" stroke="#C49A3C" stroke-width="0.75" opacity="0.4" />
+            <line x1="6" y1="6" x2="6" y2="36" stroke="#C49A3C" stroke-width="0.75" opacity="0.4" />
+          </svg>
+          <h3>Financial Analysis<br />Automation</h3>
+          <p>Real-time dashboards, automated variance analysis, ratio computation, and narrative generation. Turn raw
+            financial data into boardroom-ready insight — automatically.</p>
+          <div class="service-tags">
+            <span class="tag">Variance Analysis</span>
+            <span class="tag">Reporting</span>
+            <span class="tag">Dashboards</span>
+            <span class="tag">IFRS-Aligned</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal">
+          <p class="service-num">03</p>
+          <svg class="service-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="21" cy="15" r="7" stroke="#C49A3C" stroke-width="1" />
+            <path d="M8 36c0-7.18 5.82-13 13-13s13 5.82 13 13" stroke="#C49A3C" stroke-width="1" fill="none" />
+            <circle cx="21" cy="15" r="2" fill="#C49A3C" opacity="0.5" />
+          </svg>
+          <h3>AI Consulting<br />for SMEs</h3>
+          <p>Strategic AI roadmaps, implementation support, and team training for small and medium businesses ready to
+            build an AI-native operation. We do the thinking and the building.</p>
+          <div class="service-tags">
+            <span class="tag">AI Strategy</span>
+            <span class="tag">Implementation</span>
+            <span class="tag">Training</span>
+            <span class="tag">Automation</span>
+          </div>
+        </div>
+
+        <div class="service-card reveal">
+          <p class="service-num">04</p>
+          <svg class="service-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="10" width="30" height="22" rx="1" stroke="#C49A3C" stroke-width="1" />
+            <line x1="6" y1="16" x2="36" y2="16" stroke="#C49A3C" stroke-width="0.75" opacity="0.5" />
+            <line x1="21" y1="16" x2="21" y2="32" stroke="#C49A3C" stroke-width="0.75" opacity="0.5" />
+            <circle cx="13" cy="24" r="2" fill="#C49A3C" opacity="0.6" />
+            <line x1="28" y1="22" x2="33" y2="22" stroke="#C49A3C" stroke-width="1" />
+            <line x1="28" y1="26" x2="31" y2="26" stroke="#C49A3C" stroke-width="1" opacity="0.5" />
+          </svg>
+          <h3>AI-Powered<br />Finance Department</h3>
+          <p>A fully managed AI-enhanced finance function for businesses that need the output of a finance team without
+            the full headcount. From reconciliations to strategic reporting.</p>
+          <div class="service-tags">
+            <span class="tag">Managed Finance</span>
+            <span class="tag">Reconciliations</span>
+            <span class="tag">Strategic CFO</span>
+            <span class="tag">Compliance</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <p class="section-label reveal">The Process</p>
+      <h2 class="section-title reveal" style="text-align:center; margin-bottom:0;">How Aurum Works</h2>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">I</div>
+          <h4>Discovery Call</h4>
+          <p>We map your current workflows, pain points, and goals. No templates — a real diagnostic of your operation.
+          </p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">II</div>
+          <h4>Custom Blueprint</h4>
+          <p>We design an AI workflow architecture specific to your team, tools, and standards — IFRS, ISA, or
+            industry-specific.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">III</div>
+          <h4>Build & Deploy</h4>
+          <p>Our team builds, tests, and deploys the system. You see it working before you sign off on anything.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">IV</div>
+          <h4>Ongoing Optimisation</h4>
+          <p>We iterate with you. As your business evolves, the AI infrastructure evolves with it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-box reveal">
+          <span class="stat-num">10×</span>
+          <span class="stat-label">Faster Workflow Execution</span>
+        </div>
+        <div class="stat-box reveal">
+          <span class="stat-num">80%</span>
+          <span class="stat-label">Reduction in Manual Effort</span>
+        </div>
+        <div class="stat-box reveal">
+          <span class="stat-num">ISA</span>
+          <span class="stat-label">Standards-Aligned Outputs</span>
+        </div>
+        <div class="stat-box reveal">
+          <span class="stat-num">SME</span>
+          <span class="stat-label">to Enterprise Ready</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section id="waitlist">
+    <div class="container">
+      <div class="waitlist-inner">
+        <p class="section-label">Limited Access</p>
+        <div class="divider"></div>
+        <h2 class="section-title reveal">Be the first to work<br />with <em>Aurum.</em></h2>
+        <p class="section-desc reveal">We're opening to a small cohort of founding clients. Join the waitlist and get
+          priority access, founding pricing, and a free AI audit of your current workflows.</p>
+
+        <div class="waitlist-form reveal" id="formWrap">
+          <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email" />
+          <button onclick="handleWaitlist()">Join Waitlist</button>
+        </div>
+
+        <!-- IFRAME CONTAINER -->
+        <div id="beehiivContainer" style="display:none; max-width:480px; margin:0 auto;">
+          <iframe id="beehiivFrame" src="" frameborder="0" scrolling="no" style="width:100%; height:320px;">
+          </iframe>
+        </div>
+
+        <div class="waitlist-success" id="successMsg">
+          <p>✦ &nbsp;You're on the list, <strong id="confirmedEmail"></strong>.<br />
+            We'll be in touch with founding access details shortly.</p>
+        </div>
+
+        <p class="waitlist-fine reveal">No spam. No noise. First access when we open doors.</p>
+
+        <span class="waitlist-count reveal">
+          <span id="countDisplay">—</span> professionals already on the waitlist
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">AURUM INTELLIGENCE</div>
+    <p class="footer-note">© 2026 Aurum Intelligence. AI for Finance Professionals.</p>
+  </footer>
+
+  <script>
+    // ── SCROLL REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── WAITLIST ──
+    const STORAGE_KEY = 'aurum_waitlist';
+
+    function getList() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+    }
+
+    function saveEmail(email) {
+      const list = getList();
+      if (!list.includes(email)) { list.push(email); localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+      return list.length;
+    }
+
+    function updateCount() {
+      const n = getList().length;
+      document.getElementById('countDisplay').textContent = n > 0 ? n : '—';
+    }
+
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    }
+
+    function handleWaitlist() {
+      const email = document.getElementById('emailInput').value.trim();
+
+      if (!email) {
+        alert("Please enter your email");
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        alert("Please enter a valid email address");
+        return;
+      }
+
+      // Save locally (your counter)
+      saveEmail(email);
+      updateCount();
+
+      // Build Beehiiv URL with prefilled email
+      const url = `https://subscribe-forms.beehiiv.com/41d0b3f1-3174-454f-94e6-02ff6b19981e?email=${encodeURIComponent(email)}`;
+
+      // ✅ Redirect in SAME tab
+      window.location.href = url;
+    }
+
+
+
+    // Allow pressing Enter to submit
+    document.getElementById('emailInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleWaitlist();
+    });
+
+    document.getElementById('beehiivModal').addEventListener('click', (e) => {
+      if (e.target.id === 'beehiivModal') {
+        closeModal();
+      }
+    });
+
+    function closeModal() {
+      document.getElementById('beehiivModal').style.display = "none";
+    }
+
+    updateCount();
+  </script>
+
+  <div id="beehiivModal" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+">
+
+    <div style="
+    width: 100%;
+    max-width: 520px;
+    background: #0f0f0f;
+    border: 1px solid rgba(196,154,60,0.2);
+    border-radius: 6px;
+    padding: 1.5rem;
+    position: relative;
+  ">
+
+      <!-- Close button -->
+      <button onclick="closeModal()" style="
+      position:absolute;
+      top:10px;
+      right:14px;
+      background:none;
+      border:none;
+      color:#aaa;
+      font-size:18px;
+      cursor:pointer;
+    ">✕</button>
+
+      <!-- IFRAME -->
+      <iframe id="beehiivFrame" src="" frameborder="0" scrolling="no" style="width:100%; height:320px; border:none;">
+      </iframe>
+
+    </div>
+  </div>
+</body>
+
+</html>
